@@ -65,6 +65,10 @@ export const getWindowName = (command: ICommand, config: IConfig): string => {
 
 const getExecOptions = (config: IConfig): ExecOptions => {
   const dir = getWorkingDir(vscode.window.activeTextEditor?.document.uri);
+  const shell = config.shell;
+  if (!shell && platform() === 'win32') {
+    config.shell = 'powershell.exe';
+  }
   const execOptions: ExecOptions = {
     shell: config.shell,
     cwd: dir,
@@ -89,7 +93,7 @@ const getWorkingDir = (uri: vscode.Uri | undefined): string | undefined => {
 
 const convertExecOutput = (output: string): string => {
   if (platform() === 'win32') {
-    return iconv.decode(Buffer.from(output), 'cp936');
+    return output.replace(/\r\n/g, '\n');
   }
   return output;
 };
