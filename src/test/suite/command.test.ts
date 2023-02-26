@@ -65,7 +65,7 @@ suite('Command test', function () {
     const mock = getOutputChannelMock();
     sinon.stub(logger, 'getOutputChannel').callsFake(mock.getOutputChannel);
     await command.runCommandInOutputChannel(commandObj, configObj);
-    console.log(mock.outputResult);
+    console.log('loog', mock.outputResult);
     assert.strictEqual(mock.outputResult.length, 2);
     assert.strictEqual(mock.outputResult[0], 'test from test\n');
     assert.strictEqual(mock.outputResult[1], 'Commando done.');
