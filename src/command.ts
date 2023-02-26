@@ -1,6 +1,5 @@
 import * as vscode from 'vscode';
 import { platform } from 'os';
-import * as iconv from 'iconv-lite';
 import { ICommand, IConfig, formatReplaceKeys, FormatReplaceKey, defaultConfig } from './interface';
 import { fmt } from './util';
 import { getOutputChannel, getTerminal } from './logger';
@@ -20,10 +19,10 @@ export const runCommand = async (command: ICommand, config: IConfig): Promise<vo
 
 export const runCommandInOutputChannel = async (command: ICommand, config: IConfig): Promise<void> => {
   const outputChannel = getOutputChannel(getWindowName(command, config));
-  if (command.autoFocus || (config.autoFocus && command.autoFocus !== false)) {
+  if (getAutoFocus(command, config)) {
     outputChannel.show();
   }
-  if (command.autoClear || (config.autoClear && command.autoClear !== false)) {
+  if (getAutoClear(command, config)) {
     outputChannel.clear();
   }
   const options = getExecOptions(config);
@@ -53,7 +52,18 @@ export const runCommandInOutputChannel = async (command: ICommand, config: IConf
 };
 
 export const runCommandInTerminal = async (command: ICommand, config: IConfig): Promise<void> => {
-  // TODO: support terminal
+  const terminal = getTerminal(getWindowName(command, config));
+  if (getAutoFocus(command, config)) {
+    terminal.show();
+  }
+  if (getAutoClear(command, config)) {
+    // workbench.action.terminal.clear is not working well if autoFocus is false.
+    // Because this command will clear the active terminal
+    // whether it is the terminal we want to clear or not.
+    // So we use terminal.sendText('clear') instead.
+    terminal.sendText('clear');
+  }
+  terminal.sendText(command.cmd);
   return;
 };
 
@@ -61,6 +71,14 @@ export const getWindowName = (command: ICommand, config: IConfig): string => {
   return fmt(config.windowName ?? defaultConfig.windowName, {
     [formatReplaceKeys.commandName]: command.name,
   });
+};
+
+export const getAutoFocus = (command: ICommand, config: IConfig): boolean => {
+  return command.autoFocus ?? config.autoFocus ?? defaultConfig.autoFocus;
+};
+
+export const getAutoClear = (command: ICommand, config: IConfig): boolean => {
+  return command.autoClear ?? config.autoClear ?? defaultConfig.autoClear;
 };
 
 const getExecOptions = (config: IConfig): ExecOptions => {
