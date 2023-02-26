@@ -11,6 +11,7 @@ export interface IConfig {
   autoFocus?: boolean;
   runOnTerminal?: boolean;
   windowName?: string;
+  shell?: string;
   commands: ICommand[];
 }
 
@@ -19,6 +20,7 @@ export interface IDefaultConfig {
   autoFocus: boolean;
   runOnTerminal: boolean;
   windowName: string;
+  shell?: string;
   commands: ICommand[];
 }
 
@@ -32,5 +34,6 @@ export const defaultConfig: IDefaultConfig = {
   autoFocus: true,
   runOnTerminal: false,
   windowName: 'Commando ${commandName}',
+  shell: undefined,
   commands: [],
 };
