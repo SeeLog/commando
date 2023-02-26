@@ -9,17 +9,79 @@
   "categories": [
     "Other"
   ],
-  "activationEvents": [
-    "onCommand:commando.helloWorld"
-  ],
   "main": "./out/extension.js",
   "contributes": {
     "commands": [
       {
-        "command": "commando.helloWorld",
-        "title": "Hello World"
+        "command": "commando.runCommand",
+        "title": "Commando: Run command"
       }
-    ]
+    ],
+    "configuration": {
+      "title": "Commando Configuration",
+      "properties": {
+        "commando.autoClear": {
+          "type": "boolean",
+          "default": true,
+          "description": "If true, automatically clear the output channel or terminal after each command."
+        },
+        "commando.autoFocus": {
+          "type": "boolean",
+          "default": true,
+          "description": "If true, automatically focus the output channel or terminal after each command."
+        },
+        "commando.runOnTerminal": {
+          "type": "boolean",
+          "default": false,
+          "description": "If true, run commands on terminal. Otherwise, run commands on background and show the result in output channel."
+        },
+        "commando.windowName": {
+          "type": "string",
+          "default": "Commando ${commandName}",
+          "description": "The name of the output channel or terminal. You can use predefined variables."
+        },
+        "commando.shell": {
+          "type": ["string", "null"],
+          "default": null,
+          "description": "The shell to use for running commands. If empty, the default shell is used. This setting is only available when runOnTerminal is false."
+        },
+        "commando.commands": {
+          "type": "array",
+          "default": [],
+          "description": "The list of commands to run.",
+          "items": {
+            "type": "object",
+            "description": "The command configuration to run.",
+            "properties": {
+              "name": {
+                "type": "string",
+                "description": "The name of the command. This is used to identify the command. This must be unique."
+              },
+              "description": {
+                "type": ["string", "null"],
+                "description": "The description of the command."
+              },
+              "cmd": {
+                "type": "string",
+                "description": "The command to run."
+              },
+              "autoClear": {
+                "type": ["boolean", "null"],
+                "description": "If ture, automatically clear the output channel or terminal after each command. If null, use the value of commando.autoClear."
+              },
+              "autoFocus": {
+                "type": ["boolean", "null"],
+                "description": "If true, automatically focus the output channel or terminal after each command. If null, use the value of commando.autoFocus."
+              },
+              "runOnTerminal": {
+                "type": ["boolean", "null"],
+                "description": "If true, run commands on terminal. Otherwise, run commands on background and show the result in output channel. If null, use the value of commando.runOnTerminal."
+              }
+            }
+          }
+        }
+      }
+    }
   },
   "scripts": {
     "vscode:prepublish": "npm run compile",
@@ -48,7 +110,5 @@
     "sinon": "^15.0.1",
     "typescript": "^4.9.4"
   },
-  "dependencies": {
-    "iconv-lite": "^0.6.3"
-  }
+  "dependencies": {}
 }

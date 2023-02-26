@@ -2,13 +2,18 @@ export interface ICommand {
   autoClear?: boolean;
   autoFocus?: boolean;
   name: string;
+  description?: string;
   cmd: string;
   runOnTerminal?: boolean;
 }
 
+export interface ISpecialCommand extends ICommand {
+  kind?: 'openWorkspaceConfig' | 'openUserConfig';
+}
+
 export interface IConfig {
-  autoClear?: boolean;
-  autoFocus?: boolean;
+  autoClear: boolean;
+  autoFocus: boolean;
   runOnTerminal?: boolean;
   windowName?: string;
   shell?: string;

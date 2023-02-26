@@ -1,0 +1,14 @@
+{
+  "commando.commands": [
+    {
+      "name": "Hello World",
+      "description": "Prints Hello World to the console",
+      "cmd": "echo \"Hello World\""
+    },
+    {
+      "name": "Hello World",
+      "description": "Something wrong",
+      "cmd": "echo \"Hello World\""
+    }
+  ],
+}

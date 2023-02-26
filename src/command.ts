@@ -19,12 +19,13 @@ export const runCommand = async (command: ICommand, config: IConfig): Promise<vo
 
 export const runCommandInOutputChannel = async (command: ICommand, config: IConfig): Promise<void> => {
   const outputChannel = getOutputChannel(getWindowName(command, config));
-  if (getAutoFocus(command, config)) {
-    outputChannel.show();
-  }
   if (getAutoClear(command, config)) {
     outputChannel.clear();
   }
+  if (getAutoFocus(command, config)) {
+    outputChannel.show(true);
+  }
+
   const options = getExecOptions(config);
 
   // exec command
@@ -43,9 +44,9 @@ export const runCommandInOutputChannel = async (command: ICommand, config: IConf
   return new Promise((resolve) => {
     child.on('close', (code) => {
       if (code !== 0) {
-        outputChannel.append(`Command exited with code ${code}`);
+        outputChannel.appendLine(`Command exited with code ${code}`);
       }
-      outputChannel.append('Commando done.');
+      outputChannel.appendLine('Commando done.');
       resolve();
     });
   });
@@ -113,6 +114,5 @@ const convertExecOutput = (output: string): string => {
   if (platform() === 'win32') {
     output = output.replace(/\r\n/g, '\n');
   }
-  /// trail new line at the end
-  return output.replace(/\n$/, '');
+  return output;
 };
