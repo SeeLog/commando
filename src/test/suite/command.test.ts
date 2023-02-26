@@ -11,7 +11,7 @@ suite('Command test', function () {
 
   const commandObj: ICommand = {
     name: 'test',
-    cmd: 'echo test from test',
+    cmd: 'echo "test from test"',
   };
   const configObj: IConfig = {
     windowName: 'test',
@@ -65,9 +65,8 @@ suite('Command test', function () {
     const mock = getOutputChannelMock();
     sinon.stub(logger, 'getOutputChannel').callsFake(mock.getOutputChannel);
     await command.runCommandInOutputChannel(commandObj, configObj);
-    console.log('loog', mock.outputResult);
     assert.strictEqual(mock.outputResult.length, 2);
-    assert.strictEqual(mock.outputResult[0], 'test from test\n');
+    assert.strictEqual(mock.outputResult[0], 'test from test');
     assert.strictEqual(mock.outputResult[1], 'Commando done.');
   });
 
