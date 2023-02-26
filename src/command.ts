@@ -93,7 +93,8 @@ const getWorkingDir = (uri: vscode.Uri | undefined): string | undefined => {
 
 const convertExecOutput = (output: string): string => {
   if (platform() === 'win32') {
-    return output.replace(/\r\n/g, '\n');
+    output = output.replace(/\r\n/g, '\n');
   }
-  return output;
+  /// trail new line at the end
+  return output.replace(/\n$/, '');
 };
