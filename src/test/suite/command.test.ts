@@ -11,7 +11,7 @@ suite('Command test', function () {
 
   const commandObj: ICommand = {
     name: 'test',
-    cmd: 'echo "test from test"',
+    cmd: 'echo test from test',
   };
   const configObj: IConfig = {
     windowName: 'test',
@@ -82,7 +82,7 @@ suite('Command test', function () {
   test('Make sure runCommandInOutputChannel with multi-byte output', async () => {
     const mock = getOutputChannelMock();
     sinon.stub(logger, 'getOutputChannel').callsFake(mock.getOutputChannel);
-    await command.runCommandInOutputChannel({ ...commandObj, cmd: 'echo "こんにちは"' }, configObj);
+    await command.runCommandInOutputChannel({ ...commandObj, cmd: 'echo こんにちは' }, configObj);
     assert.strictEqual(mock.outputResult.length, 2);
     assert.strictEqual(mock.outputResult[0], 'こんにちは\n');
     assert.strictEqual(mock.outputResult[1], 'Commando done.');
