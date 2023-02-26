@@ -8,11 +8,12 @@
  * format('Hello ${name}', { name: 'SeeLog' }); // Hello SeeLog
  */
 export const format = (template: string, valueObj?: { [key: string]: string | number | null | undefined }): string => {
-  return !valueObj ? template
+  return !valueObj
+    ? template
     : template.replace(/\${(.*?)}/g, (match, key) => {
-      if (valueObj[key] === undefined) {
-        throw new Error(`Value for ${key} not found in object`);
-      }
-      return valueObj[key] as string;
-    });
+        if (valueObj[key] === undefined) {
+          throw new Error(`Value for ${key} not found in object`);
+        }
+        return valueObj[key] as string;
+      });
 };

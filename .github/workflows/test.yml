@@ -19,6 +19,9 @@ jobs:
         node:
           - 19
     steps:
+      - name: Set autocrlf to false
+        run: git config --global core.autocrlf false
+        if: ${{ success() && matrix.os == 'windows-latest' }}
       - name: Checkout
         uses: actions/checkout@v3
       - name: Install Node ${{ matrix.node }}
