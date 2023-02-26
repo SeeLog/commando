@@ -7,7 +7,7 @@
  * @example
  * format('Hello ${name}', { name: 'SeeLog' }); // Hello SeeLog
  */
-export const format = (template: string, valueObj?: { [key: string]: string | number | null | undefined }): string => {
+export const fmt = (template: string, valueObj?: { [key: string]: string | number | null | undefined }): string => {
   return !valueObj
     ? template
     : template.replace(/\${(.*?)}/g, (match, key) => {
