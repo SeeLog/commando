@@ -16,6 +16,8 @@ suite('Command test', function () {
   const configObj: IConfig = {
     windowName: 'test',
     commands: [commandObj],
+    autoClear: true,
+    autoFocus: true,
   };
 
   const getOutputChannelMock = () => {
@@ -27,7 +29,7 @@ suite('Command test', function () {
           outputResult.push(text);
         },
         appendLine: (text: string) => {
-          outputResult.push(text);
+          outputResult.push(text + '\n');
         },
         clear: () => {
           outputResult.length = 0;
@@ -98,8 +100,8 @@ suite('Command test', function () {
     sinon.stub(logger, 'getOutputChannel').callsFake(mock.getOutputChannel);
     await command.runCommandInOutputChannel(commandObj, configObj);
     assert.strictEqual(mock.outputResult.length, 2);
-    assert.strictEqual(mock.outputResult[0], 'test from test');
-    assert.strictEqual(mock.outputResult[1], 'Commando done.');
+    assert.strictEqual(mock.outputResult[0], 'test from test\n');
+    assert.strictEqual(mock.outputResult[1], 'Commando done.\n');
   });
 
   test('Make sure runCommandInOutputChannel with status code 1', async () => {
@@ -107,8 +109,8 @@ suite('Command test', function () {
     sinon.stub(logger, 'getOutputChannel').callsFake(mock.getOutputChannel);
     await command.runCommandInOutputChannel({ ...commandObj, cmd: 'exit 1' }, configObj);
     assert.strictEqual(mock.outputResult.length, 2);
-    assert.strictEqual(mock.outputResult[0], 'Command exited with code 1');
-    assert.strictEqual(mock.outputResult[1], 'Commando done.');
+    assert.strictEqual(mock.outputResult[0], 'Command exited with code 1\n');
+    assert.strictEqual(mock.outputResult[1], 'Commando done.\n');
   });
 
   test('Make sure runCommandInTerminal', async () => {
