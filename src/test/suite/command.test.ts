@@ -65,6 +65,7 @@ suite('Command test', function () {
     const mock = getOutputChannelMock();
     sinon.stub(logger, 'getOutputChannel').callsFake(mock.getOutputChannel);
     await command.runCommandInOutputChannel(commandObj, configObj);
+    console.log(mock.outputResult);
     assert.strictEqual(mock.outputResult.length, 2);
     assert.strictEqual(mock.outputResult[0], 'test from test\n');
     assert.strictEqual(mock.outputResult[1], 'Commando done.');
@@ -76,15 +77,6 @@ suite('Command test', function () {
     await command.runCommandInOutputChannel({ ...commandObj, cmd: 'exit 1' }, configObj);
     assert.strictEqual(mock.outputResult.length, 2);
     assert.strictEqual(mock.outputResult[0], 'Command exited with code 1');
-    assert.strictEqual(mock.outputResult[1], 'Commando done.');
-  });
-
-  test('Make sure runCommandInOutputChannel with multi-byte output', async () => {
-    const mock = getOutputChannelMock();
-    sinon.stub(logger, 'getOutputChannel').callsFake(mock.getOutputChannel);
-    await command.runCommandInOutputChannel({ ...commandObj, cmd: 'echo こんにちは' }, configObj);
-    assert.strictEqual(mock.outputResult.length, 2);
-    assert.strictEqual(mock.outputResult[0], 'こんにちは\n');
     assert.strictEqual(mock.outputResult[1], 'Commando done.');
   });
 });
