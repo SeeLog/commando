@@ -1,8 +1,18 @@
 import * as assert from 'assert';
 import * as vscode from 'vscode';
-import { getConfig } from '../../config';
+import { getConfig, LoadConfigError } from '../../config';
 
-suite('Config Test Suite', async () => {
+suite('Config Test Suite', function async() {
+  this.afterEach(async () => {
+    await vscode.workspace.getConfiguration().update('commando.commands', [
+      {
+        name: 'Hello World',
+        description: 'Prints Hello World to the console',
+        cmd: 'echo "Hello World"',
+      },
+    ]);
+  });
+
   test('Make sure config can load properly', async () => {
     vscode.workspace
       .getConfiguration()
@@ -37,7 +47,7 @@ suite('Config Test Suite', async () => {
         },
       ])
       .then(() => {
-        assert.throws(() => getConfig(), Error);
+        assert.throws(() => getConfig(), LoadConfigError);
       });
   });
 });
