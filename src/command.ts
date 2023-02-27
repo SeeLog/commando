@@ -1,9 +1,9 @@
 import * as vscode from 'vscode';
 import { platform } from 'os';
-import { ICommand, IConfig, formatReplaceKeys, FormatReplaceKey, defaultConfig } from './interface';
-import { fmt } from './util';
+import { ICommand, IConfig, defaultConfig } from './interface';
 import { getOutputChannel, getTerminal } from './logger';
 import { exec, ExecOptions } from 'child_process';
+import { convertPlaceholder } from './variable';
 
 /*
  * Run command in VSCode output channel or terminal
@@ -29,7 +29,8 @@ export const runCommandInOutputChannel = async (command: ICommand, config: IConf
   const options = getExecOptions(command, config);
 
   // exec command
-  const child = exec(command.cmd, options);
+  const commandText = getCommandText(command, config);
+  const child = exec(commandText, options);
   child.stdout?.on('data', (data) => {
     outputChannel.append(convertExecOutput(data));
   });
@@ -64,8 +65,20 @@ export const runCommandInTerminal = async (command: ICommand, config: IConfig): 
     // So we use terminal.sendText('clear') instead.
     terminal.sendText('clear');
   }
-  terminal.sendText(command.cmd);
+  const commandText = getCommandText(command, config);
+  terminal.sendText(commandText);
   return;
+};
+
+/**
+ * Convert exec input to string
+ * @param command command interface
+ * @param config config interface
+ * @returns command text
+ */
+export const getCommandText = (command: ICommand, config: IConfig): string => {
+  const template = command.cmd;
+  return convertPlaceholder(template, command, config);
 };
 
 /**
@@ -86,9 +99,7 @@ export const getShell = (command: ICommand, config: IConfig): string | undefined
  */
 export const getWindowName = (command: ICommand, config: IConfig): string => {
   const template = command.windowName ?? config.windowName ?? defaultConfig.windowName;
-  return fmt(template, {
-    [formatReplaceKeys.commandName]: command.name,
-  });
+  return convertPlaceholder(template, command, config);
 };
 
 /**

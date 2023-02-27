@@ -4,6 +4,11 @@
       "name": "Hello World",
       "description": "Prints Hello World to the console",
       "cmd": "echo \"Hello World\""
+    },
+    {
+      "name": "Placeholders",
+      "description": "Prints placeholders to the console",
+      "cmd": "echo 'commandName: \"${commandName}\"\nworkspaceFolder: \"${workspaceFolder}\"\nworkspaceFolderBasename: \"${workspaceFolderBasename}\"\nhomeDir: \"${homeDir}\"\ntmpDir: \"${tmpDir}\"\nplatform: \"${platform}\"\nfile: \"${file}\"\nfileBasename: \"${fileBasename}\"\nfileExtname: \"${fileExtname}\"\nfileBasenameWithoutExt: \"${fileBasenameWithoutExt}\"\nfileDirName: \"${fileDirName}\"\nrelativeFile: \"${relativeFile}\"\nlineNumber: \"${lineNumber}\"\nlineNumbers: \"${lineNumbers}\"\ncolumnNumber: \"${columnNumber}\"\ncolumnNumbers: \"${columnNumbers}\"\nselectedText: \"${selectedText}\"\nselectedTexts: \"${selectedTexts}\"'"
     }
   ],
   "commando.autoClear": true,

@@ -31,11 +31,6 @@ export interface IDefaultConfig {
   commands: ICommand[];
 }
 
-export const formatReplaceKeys = {
-  commandName: 'commandName',
-} as const;
-export type FormatReplaceKey = (typeof formatReplaceKeys)[keyof typeof formatReplaceKeys];
-
 export const defaultConfig: IDefaultConfig = {
   autoClear: true,
   autoFocus: true,
