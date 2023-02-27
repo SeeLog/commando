@@ -24,8 +24,23 @@ export const activate = (context: vscode.ExtensionContext) => {
     config = getConfig();
   });
 
-  const disposable = vscode.commands.registerCommand('commando.runCommand', async () => {
+  const disposable = vscode.commands.registerCommand('commando.runCommand', async (args) => {
     if (config !== undefined) {
+      if (args !== undefined) {
+        const name = args.name;
+        if (name === undefined) {
+          vscode.window.showErrorMessage('keybindings configuration is invalid. "name" is required.');
+          return;
+        }
+        const command = config.commands.find((command) => command.name === name);
+        if (command) {
+          runCommand(command, config);
+          return;
+        } else {
+          vscode.window.showErrorMessage(`Commando command not found: ${name}`);
+          return;
+        }
+      }
       const pickItems = getPickerItems(config);
       const selectedItem = await vscode.window.showQuickPick<PickerCommandItem>(pickItems, {
         placeHolder: 'Select a command to run',
