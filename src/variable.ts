@@ -57,7 +57,7 @@ export const convertPlaceholder = (
   const fileBasename = path.basename(filePath);
   const fileExtname = path.extname(filePath);
   const fileBasenameWithoutExt = path.basename(filePath, fileExtname);
-  const fileDirName = path.dirname(filePath);
+  const fileDirName = filePath.length > 0 ? path.dirname(filePath) : '';
   const relativeFilePath = path.relative(workspaceFolder, filePath);
 
   const lineNumber = vscode.window.activeTextEditor?.selection.active.line ?? '';
