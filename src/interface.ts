@@ -5,6 +5,8 @@ export interface ICommand {
   description?: string;
   cmd: string;
   runOnTerminal?: boolean;
+  windowName?: string;
+  shell?: string;
 }
 
 export interface ISpecialCommand extends ICommand {
