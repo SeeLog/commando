@@ -26,7 +26,7 @@ export const runCommandInOutputChannel = async (command: ICommand, config: IConf
     outputChannel.show(true);
   }
 
-  const options = getExecOptions(config);
+  const options = getExecOptions(command, config);
 
   // exec command
   const child = exec(command.cmd, options);
@@ -68,28 +68,63 @@ export const runCommandInTerminal = async (command: ICommand, config: IConfig): 
   return;
 };
 
+/**
+ * Get shell
+ * @param command command interface
+ * @param config config interface
+ * @returns shell
+ */
+export const getShell = (command: ICommand, config: IConfig): string | undefined => {
+  return command.shell ?? config.shell ?? defaultConfig.shell;
+};
+
+/**
+ * Get window name
+ * @param command command interface
+ * @param config config interface
+ * @returns window name
+ */
 export const getWindowName = (command: ICommand, config: IConfig): string => {
-  return fmt(config.windowName ?? defaultConfig.windowName, {
+  const template = command.windowName ?? config.windowName ?? defaultConfig.windowName;
+  return fmt(template, {
     [formatReplaceKeys.commandName]: command.name,
   });
 };
 
+/**
+ * Get Auto focus option
+ * @param command command interface
+ * @param config config interface
+ * @returns Auto focus option
+ */
 export const getAutoFocus = (command: ICommand, config: IConfig): boolean => {
   return command.autoFocus ?? config.autoFocus ?? defaultConfig.autoFocus;
 };
 
+/**
+ * Get Auto clear option
+ * @param command command interface
+ * @param config config interface
+ * @returns Auto clear option
+ */
 export const getAutoClear = (command: ICommand, config: IConfig): boolean => {
   return command.autoClear ?? config.autoClear ?? defaultConfig.autoClear;
 };
 
-const getExecOptions = (config: IConfig): ExecOptions => {
+/**
+ * Get exec options
+ * @param command command interface
+ * @param config config interface
+ * @returns exec options
+ */
+const getExecOptions = (command: ICommand, config: IConfig): ExecOptions => {
   const dir = getWorkingDir(vscode.window.activeTextEditor?.document.uri);
-  const shell = config.shell;
+  let shell = getShell(command, config);
   if (!shell && platform() === 'win32') {
-    config.shell = 'powershell.exe';
+    shell = 'powershell.exe';
   }
   const execOptions: ExecOptions = {
-    shell: config.shell,
+    shell: shell,
     cwd: dir,
   };
   return execOptions;
@@ -110,6 +145,11 @@ const getWorkingDir = (uri: vscode.Uri | undefined): string | undefined => {
   return fileWorkspaceFolder ? fileWorkspaceFolder.uri.fsPath : vscode.workspace.workspaceFolders?.[0].uri.fsPath;
 };
 
+/**
+ * Convert exec output to unix style
+ * @param output exec output
+ * @returns unix style output
+ */
 const convertExecOutput = (output: string): string => {
   if (platform() === 'win32') {
     output = output.replace(/\r\n/g, '\n');
