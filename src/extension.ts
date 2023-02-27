@@ -29,7 +29,7 @@ export const activate = (context: vscode.ExtensionContext) => {
       if (args !== undefined) {
         const name = args.name;
         if (name === undefined) {
-          vscode.window.showErrorMessage('keybindings configuration is invalid. "name" is required.');
+          vscode.window.showErrorMessage('keybindings configuration is invalid.\n"name" is required.');
           return;
         }
         const command = config.commands.find((command) => command.name === name);
