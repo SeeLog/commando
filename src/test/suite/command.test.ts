@@ -136,7 +136,7 @@ suite('Command test', function () {
     const mock = getOutputChannelMock();
     sinon.stub(logger, 'getOutputChannel').callsFake(mock.getOutputChannel);
     await command.runCommandInOutputChannel({ ...commandObj, shell: '/bin/zsh', cmd: 'echo $0' }, configObj);
-    console.log(mock.outputResult);
+    console.log('outputResult', mock.outputResult);
     assert.strictEqual(mock.outputResult.length, 2);
     assert.strictEqual(mock.outputResult[0].indexOf('zsh') > -1, true);
     assert.strictEqual(mock.outputResult[1], 'Commando done.\n');
