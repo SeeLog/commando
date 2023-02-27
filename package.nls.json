@@ -8,7 +8,7 @@
   "commando.configuration.runOnTerminal.title": "Run on terminal",
   "commando.configuration.runOnTerminal.description": "If true, run commands on terminal. Otherwise, run commands on background and show the result in output channel.",
   "commando.configuration.windowName.title": "Window name",
-  "commando.configuration.windowName.description": "The name of the output channel or terminal. You can use predefined variables.",
+  "commando.configuration.windowName.description": "The name of the output channel or terminal. You can use placeholders.",
   "commando.configuration.shell.title": "Shell",
   "commando.configuration.shell.description": "The shell to use for running commands. If empty, the default shell is used. This setting is only available when runOnTerminal is false.",
   "commando.configuration.commands.title": "Commands",
@@ -20,7 +20,7 @@
   "commando.configuration.commands.item.description.title": "Command description",
   "commando.configuration.commands.item.description.description": "The description of the command. This is used to show the command in the command palette.",
   "commando.configuration.commands.item.cmd.title": "Command text",
-  "commando.configuration.commands.item.cmd.description": "The command to run. You can use predefined variables.",
+  "commando.configuration.commands.item.cmd.description": "The command to run. You can use placeholders.",
   "commando.configuration.commands.item.autoClear.title": "Auto clear",
   "commando.configuration.commands.item.autoClear.description": "If true, automatically clear the output channel or terminal after each command. If null, use the value of commando.autoClear.",
   "commando.configuration.commands.item.autoFocus.title": "Auto focus",
@@ -30,5 +30,5 @@
   "commando.configuration.commands.item.shell.title": "Shell",
   "commando.configuration.commands.item.shell.description": "The shell to use for running commands. If empty, the default shell is used. This setting is only available when runOnTerminal is false. If null, use the value of commando.shell.",
   "commando.configuration.commands.item.windowName.title": "Window name",
-  "commando.configuration.commands.item.windowName.description": "The name of the output channel or terminal. You can use predefined variables. If null, use the value of commando.windowName."
+  "commando.configuration.commands.item.windowName.description": "The name of the output channel or terminal. You can use placeholders. If null, use the value of commando.windowName."
 }
