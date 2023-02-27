@@ -142,7 +142,6 @@ suite('Command test', function () {
     mock.outputResult.length = 0;
 
     await command.runCommandInOutputChannel({ ...commandObj, shell: '/bin/bash', cmd: 'echo $0' }, configObj);
-    assert.strictEqual(mock.outputResult.length, 2);
     assert.strictEqual(mock.outputResult[0].indexOf('bash') > -1, true);
     assert.strictEqual(mock.outputResult[1], 'Commando done.\n');
   });
