@@ -14,68 +14,96 @@
     "commands": [
       {
         "command": "commando.runCommand",
-        "title": "Commando: Run command"
+        "title": "%commando.runCommand.title%"
       }
     ],
     "configuration": {
-      "title": "Commando Configuration",
+      "title": "%commando.configuration.title%",
       "properties": {
         "commando.autoClear": {
           "type": "boolean",
           "default": true,
-          "description": "If true, automatically clear the output channel or terminal after each command."
+          "title": "%commando.configuration.autoClear.title%",
+          "description": "%commando.configuration.autoClear.description%"
         },
         "commando.autoFocus": {
           "type": "boolean",
           "default": true,
-          "description": "If true, automatically focus the output channel or terminal after each command."
+          "title": "%commando.configuration.autoFocus.title%",
+          "description": "%commando.configuration.autoFocus.description%"
         },
         "commando.runOnTerminal": {
           "type": "boolean",
           "default": false,
-          "description": "If true, run commands on terminal. Otherwise, run commands on background and show the result in output channel."
+          "title": "%commando.configuration.runOnTerminal.title%",
+          "description": "%commando.configuration.runOnTerminal.description%"
         },
         "commando.windowName": {
           "type": "string",
           "default": "Commando ${commandName}",
-          "description": "The name of the output channel or terminal. You can use predefined variables."
+          "title": "%commando.configuration.windowName.title%",
+          "description": ""
         },
         "commando.shell": {
           "type": ["string", "null"],
           "default": null,
-          "description": "The shell to use for running commands. If empty, the default shell is used. This setting is only available when runOnTerminal is false."
+          "title": "%commando.configuration.shell.title%",
+          "description": "%commando.configuration.shell.description%"
         },
         "commando.commands": {
           "type": "array",
           "default": [],
-          "description": "The list of commands to run.",
+          "title": "%commando.configuration.commands.title%",
+          "description": "%commando.configuration.commands.description%",
           "items": {
             "type": "object",
-            "description": "The command configuration to run.",
+            "title": "%commando.configuration.commands.item.title%",
+            "description": "commando.configuration.commands.item.description%",
             "properties": {
               "name": {
                 "type": "string",
-                "description": "The name of the command. This is used to identify the command. This must be unique."
+                "title": "%commando.configuration.commands.item.name.title%",
+                "description": "%commando.configuration.commands.item.name.description%"
               },
               "description": {
                 "type": ["string", "null"],
-                "description": "The description of the command."
+                "title": "%commando.configuration.commands.item.description.title%",
+                "description": "%commando.configuration.commands.item.description.description%"
               },
               "cmd": {
                 "type": "string",
-                "description": "The command to run."
+                "title": "%commando.configuration.commands.item.cmd.title%",
+                "description": "%commando.configuration.commands.item.cmd.description%"
               },
               "autoClear": {
                 "type": ["boolean", "null"],
-                "description": "If ture, automatically clear the output channel or terminal after each command. If null, use the value of commando.autoClear."
+                "default": true,
+                "title": "%commando.configuration.commands.item.autoClear.title%",
+                "description": "%commando.configuration.commands.item.autoClear.description%"
               },
               "autoFocus": {
                 "type": ["boolean", "null"],
-                "description": "If true, automatically focus the output channel or terminal after each command. If null, use the value of commando.autoFocus."
+                "default": true,
+                "title": "%commando.configuration.commands.item.autoFocus.title%",
+                "description": "%commando.configuration.commands.item.autoFocus.description%"
               },
               "runOnTerminal": {
                 "type": ["boolean", "null"],
-                "description": "If true, run commands on terminal. Otherwise, run commands on background and show the result in output channel. If null, use the value of commando.runOnTerminal."
+                "default": false,
+                "title": "%commando.configuration.commands.item.runOnTerminal.title%",
+                "description": "%commando.configuration.commands.item.runOnTerminal.description%"
+              },
+              "shell": {
+                "type": ["string", "null"],
+                "default": null,
+                "title": "%commando.configuration.commands.item.shell.title%",
+                "description": "%commando.configuration.commands.item.shell.description%"
+              },
+              "windowName": {
+                "type": ["string", "null"],
+                "default": null,
+                "title": "%commando.configuration.commands.item.windowName.title%",
+                "description": "%commando.configuration.commands.item.windowName.description%"
               }
             }
           }
