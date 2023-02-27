@@ -122,6 +122,37 @@ suite('Command test', function () {
     assert.strictEqual(mock.terminalSentTextList[1], 'echo "test from test"');
   });
 
+  test('Make sure getShell', () => {
+    assert.strictEqual(command.getShell(commandObj, configObj), undefined);
+    assert.strictEqual(command.getShell({ ...commandObj, shell: 'zsh' }, configObj), 'zsh');
+    assert.strictEqual(command.getShell({ ...commandObj, shell: 'zsh' }, { ...configObj, shell: 'bash' }), 'zsh');
+    assert.strictEqual(command.getShell(commandObj, { ...configObj, shell: 'bash' }), 'bash');
+  });
+
+  test('Make sure running on specific shell', async () => {
+    if (process.platform === 'win32') {
+      return;
+    }
+    const mock = getOutputChannelMock();
+    sinon.stub(logger, 'getOutputChannel').callsFake(mock.getOutputChannel);
+    await command.runCommandInOutputChannel({ ...commandObj, shell: '/bin/sh', cmd: 'echo $0' }, configObj);
+    assert.strictEqual(mock.outputResult.length, 2);
+    assert.strictEqual(mock.outputResult[0].indexOf('/bin/sh') > -1, true);
+    assert.strictEqual(mock.outputResult[1], 'Commando done.\n');
+    mock.outputResult.length = 0;
+
+    await command.runCommandInOutputChannel({ ...commandObj, shell: '/bin/bash', cmd: 'echo $0' }, configObj);
+    assert.strictEqual(mock.outputResult.length, 2);
+    assert.strictEqual(mock.outputResult[0].indexOf('bash') > -1, true);
+    assert.strictEqual(mock.outputResult[1], 'Commando done.\n');
+  });
+
+  test('Make sure getWindowName', () => {
+    assert.strictEqual(command.getWindowName(commandObj, configObj), 'test');
+    assert.strictEqual(command.getWindowName(commandObj, { ...configObj, windowName: undefined }), 'Commando test');
+    assert.strictEqual(command.getWindowName({ ...commandObj, windowName: 'test2' }, configObj), 'test2');
+  });
+
   test('Make sure getAutoFocus', () => {
     // default true
     assert.strictEqual(command.getAutoFocus(commandObj, configObj), true);

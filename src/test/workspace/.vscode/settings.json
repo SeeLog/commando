@@ -5,5 +5,10 @@
       "description": "Prints Hello World to the console",
       "cmd": "echo \"Hello World\""
     }
-  ]
+  ],
+  "commando.autoClear": true,
+  "commando.autoFocus": true,
+  "commando.runOnTerminal": false,
+  "commando.shell": "bash",
+  "commando.windowName": "Commando ${commandName}",
 }
