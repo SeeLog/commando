@@ -38,19 +38,22 @@ export const convertPlaceholder = (
   text: string,
   command: ICommand,
   config: IConfig,
-  document: vscode.TextDocument
+  document: vscode.TextDocument | undefined = vscode.window.activeTextEditor?.document
 ): string => {
   const commandName = command.name;
   const commandCmd = command.cmd;
 
-  const workspaceFolder = vscode.workspace.getWorkspaceFolder(document.uri)?.uri.fsPath ?? '';
+  let workspaceFolder = '';
+  if (document) {
+    workspaceFolder = vscode.workspace.getWorkspaceFolder(document.uri)?.uri.fsPath ?? '';
+  }
   const workspaceFolderBasename = path.basename(workspaceFolder);
   const homeDir = process.env.HOME ?? process.env.USERPROFILE ?? '';
   const tmpDir = process.env.TMPDIR ?? '';
 
   const platform = process.platform;
 
-  const filePath = document.fileName;
+  const filePath = document?.fileName ?? '';
   const fileBasename = path.basename(filePath);
   const fileExtname = path.extname(filePath);
   const fileBasenameWithoutExt = path.basename(filePath, fileExtname);
