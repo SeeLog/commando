@@ -1,4 +1,5 @@
 import * as vscode from 'vscode';
+import * as os from 'os';
 import * as path from 'path';
 import { fmt } from './util';
 import { ICommand, IConfig } from './interface';
@@ -48,8 +49,8 @@ export const convertPlaceholder = (
     workspaceFolder = vscode.workspace.getWorkspaceFolder(document.uri)?.uri.fsPath ?? '';
   }
   const workspaceFolderBasename = path.basename(workspaceFolder);
-  const homeDir = process.env.HOME ?? process.env.USERPROFILE ?? '';
-  const tmpDir = process.env.TMPDIR ?? '';
+  const homeDir = os.homedir();
+  const tmpDir = os.tmpdir();
 
   const platform = process.platform;
 
