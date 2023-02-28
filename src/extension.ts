@@ -2,6 +2,8 @@ import * as vscode from 'vscode';
 import { execute } from './command';
 import { ICommand, IConfig, ISpecialCommand } from './interface';
 import { getConfig, LoadConfigError } from './config';
+import { localeMap } from './locale';
+import { fmt } from './util';
 
 export type PickerCommandItem = vscode.QuickPickItem & { commandoCommand: ICommand & ISpecialCommand };
 
@@ -12,7 +14,6 @@ export const activate = (context: vscode.ExtensionContext) => {
     config = getConfig();
   } catch (error) {
     if (error instanceof LoadConfigError) {
-      vscode.window.showErrorMessage(error.message);
       configError = error;
     } else {
       throw error;
@@ -21,7 +22,15 @@ export const activate = (context: vscode.ExtensionContext) => {
 
   vscode.workspace.onDidChangeConfiguration(() => {
     console.log('Commando configuration changed.');
-    config = getConfig();
+    try {
+      config = getConfig();
+    } catch (error) {
+      if (error instanceof LoadConfigError) {
+        configError = error;
+      } else {
+        throw error;
+      }
+    }
   });
 
   const disposable = vscode.commands.registerCommand('commando.execute', async (args) => {
@@ -29,7 +38,9 @@ export const activate = (context: vscode.ExtensionContext) => {
       if (args !== undefined) {
         const name = args.name;
         if (name === undefined) {
-          vscode.window.showErrorMessage('keybindings configuration is invalid.\n"name" is required.');
+          vscode.window.showErrorMessage(
+            localeMap('commando.error.keybindingsConfiguration.invalidArgs.nameIsRequired')
+          );
           return;
         }
         const command = config.commands.find((command) => command.name === name);
@@ -37,7 +48,7 @@ export const activate = (context: vscode.ExtensionContext) => {
           execute(command, config);
           return;
         } else {
-          vscode.window.showErrorMessage(`Commando command not found: ${name}`);
+          vscode.window.showErrorMessage(fmt(localeMap('commando.error.commandNotFound'), { commandName: name }));
           return;
         }
       }
@@ -62,7 +73,7 @@ export const activate = (context: vscode.ExtensionContext) => {
       }
       execute(<ICommand>selectedCommand, config);
     } else {
-      vscode.window.showErrorMessage(`Commando configuration is invalid.\n${configError?.message}`);
+      vscode.window.showErrorMessage(localeMap('commando.error.configuration.invalid') + `\n${configError?.message}`);
     }
   });
 

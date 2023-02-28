@@ -1,4 +1,6 @@
 import * as vscode from 'vscode';
+import { localeMap } from './locale';
+import { fmt } from './util';
 import { IConfig, ICommand } from './interface';
 
 export class LoadConfigError extends Error {}
@@ -13,7 +15,8 @@ export const getConfig = (): IConfig => {
       throw new LoadConfigError('Invalid commando command. Must have name and cmd.');
     }
     if (alreadyUsedNameObj[command.name]) {
-      throw new LoadConfigError(`Duplicate commando command name: ${command.name}`);
+      console.log('Duplicate commando command name: ', command.name);
+      throw new LoadConfigError(fmt(localeMap('commando.error.duplicateCommandName'), { commandName: command.name }));
     }
     alreadyUsedNameObj[command.name] = true;
   });

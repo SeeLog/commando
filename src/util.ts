@@ -1,3 +1,5 @@
+import { localeMap } from './locale';
+
 /**
  * Format the template string with values from an object
  * If the value is not found in the object, throw an error
@@ -12,7 +14,7 @@ export const fmt = (template: string, valueObj?: { [key: string]: string | numbe
     ? template
     : template.replace(/\${(.*?)}/g, (match, key) => {
         if (valueObj[key] === undefined) {
-          throw new Error(`Value for ${key} not found in object`);
+          throw new Error(fmt(localeMap('commando.error.valueForKeyNotFound'), { key }));
         }
         return valueObj[key] as string;
       });
