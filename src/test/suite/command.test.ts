@@ -18,6 +18,7 @@ suite('Command test', function () {
     commands: [commandObj],
     autoClear: true,
     autoFocus: true,
+    shell: '',
   };
 
   const getOutputChannelMock = () => {

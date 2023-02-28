@@ -23,7 +23,7 @@ export const getConfig = (): IConfig => {
     autoFocus: config.get<boolean>('autoFocus') ?? true,
     executeInTerminal: config.get<boolean>('executeInTerminal') ?? false,
     windowName: config.get<string>('windowName') ?? 'Commando ${commandName}',
-    shell: config.get<string>('shell'),
+    shell: config.get<string>('shell') ?? '',
     commands: config.get<ICommand[]>('commands') ?? [],
   };
 };
