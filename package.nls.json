@@ -33,8 +33,8 @@
   "commando.configuration.commands.item.windowName.description": "The name of the output channel or terminal. You can use placeholders. If null, use the value of commando.windowName.",
 
   "commando.error.valueForKeyNotFound": "Value for ${key} not found in object",
-  "commando.error.duplicateCommandName": "Duplicate commando command name: ${commandName}",
-  "commando.error.keybindingsConfiguration.invalidArgs.nameIsRequired": "keybindings configuration is invalid.\n\"name\" is required.",
+  "commando.error.duplicateCommandName": "Duplicate command name: ${commandName}",
+  "commando.error.keybindingsConfiguration.invalidArgs.nameIsRequired": "The keybindings configuration is invalid.\nPlease add the \"name\" property to the \"args\" object.",
   "commando.error.commandNotFound": "Command not found: ${commandName}",
   "commando.error.configuration.invalid": "Commando configuration is invalid."
 }
