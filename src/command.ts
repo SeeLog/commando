@@ -131,7 +131,7 @@ export const getAutoClear = (command: ICommand, config: IConfig): boolean => {
 const getExecOptions = (command: ICommand, config: IConfig): ExecOptions => {
   const dir = getWorkingDir(vscode.window.activeTextEditor?.document.uri);
   let shell = getShell(command, config);
-  if (shell !== '' && platform() === 'win32') {
+  if (shell === '' && platform() === 'win32') {
     shell = 'powershell.exe';
   }
   const execOptions: ExecOptions = {
