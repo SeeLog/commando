@@ -30,5 +30,11 @@
   "commando.configuration.commands.item.shell.title": "Shell",
   "commando.configuration.commands.item.shell.description": "コマンドを実行するシェルを指定できます。空の場合、デフォルトのシェルが使用されます。executeInTerminal が false の場合のみ有効です。null の場合、commando.shell の値を使用します。",
   "commando.configuration.commands.item.windowName.title": "ウィンドウの名前",
-  "commando.configuration.commands.item.windowName.description": "出力ウィンドウやターミナルの名前です。プレースホルダーを使用できます。null の場合、commando.windowName の値を使用します。"
+  "commando.configuration.commands.item.windowName.description": "出力ウィンドウやターミナルの名前です。プレースホルダーを使用できます。null の場合、commando.windowName の値を使用します。",
+
+  "commando.error.valueForKeyNotFound": "${key} が存在しません。",
+  "commando.error.duplicateCommandName": "コマンド名が重複しています: ${commandName}",
+  "commando.error.keybindingsConfiguration.invalidArgs.nameIsRequired": "キーバインドの設定が不正です。\n\"name\" を \"args\" に追加してください。",
+  "commando.error.commandNotFound": "コマンドが存在しません: ${commandName}",
+  "commando.error.configuration.invalid": "Commando の設定が不正です。"
 }

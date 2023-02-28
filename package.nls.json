@@ -30,5 +30,11 @@
   "commando.configuration.commands.item.shell.title": "Shell",
   "commando.configuration.commands.item.shell.description": "The shell to use for running commands. If empty, the default shell is used. This setting is only available when executeInTerminal is false. If null, use the value of commando.shell.",
   "commando.configuration.commands.item.windowName.title": "Window name",
-  "commando.configuration.commands.item.windowName.description": "The name of the output channel or terminal. You can use placeholders. If null, use the value of commando.windowName."
+  "commando.configuration.commands.item.windowName.description": "The name of the output channel or terminal. You can use placeholders. If null, use the value of commando.windowName.",
+
+  "commando.error.valueForKeyNotFound": "Value for ${key} not found in object",
+  "commando.error.duplicateCommandName": "Duplicate command name: ${commandName}",
+  "commando.error.keybindingsConfiguration.invalidArgs.nameIsRequired": "The keybindings configuration is invalid.\nPlease add the \"name\" property to the \"args\" object.",
+  "commando.error.commandNotFound": "Command not found: ${commandName}",
+  "commando.error.configuration.invalid": "Commando configuration is invalid."
 }
