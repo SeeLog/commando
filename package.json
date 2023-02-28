@@ -45,7 +45,7 @@
           "description": ""
         },
         "commando.shell": {
-          "type": ["string", "null"],
+          "type": "string",
           "default": null,
           "title": "%commando.configuration.shell.title%",
           "description": "%commando.configuration.shell.description%"

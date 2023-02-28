@@ -87,8 +87,8 @@ export const getCommandText = (command: ICommand, config: IConfig): string => {
  * @param config config interface
  * @returns shell
  */
-export const getShell = (command: ICommand, config: IConfig): string | undefined => {
-  return command.shell ?? config.shell ?? defaultConfig.shell;
+export const getShell = (command: ICommand, config: IConfig): string => {
+  return command.shell ?? config.shell;
 };
 
 /**
@@ -131,11 +131,11 @@ export const getAutoClear = (command: ICommand, config: IConfig): boolean => {
 const getExecOptions = (command: ICommand, config: IConfig): ExecOptions => {
   const dir = getWorkingDir(vscode.window.activeTextEditor?.document.uri);
   let shell = getShell(command, config);
-  if (!shell && platform() === 'win32') {
+  if (shell === '' && platform() === 'win32') {
     shell = 'powershell.exe';
   }
   const execOptions: ExecOptions = {
-    shell: shell,
+    shell: shell === '' ? undefined : shell,
     cwd: dir,
   };
   return execOptions;

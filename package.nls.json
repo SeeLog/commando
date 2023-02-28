@@ -25,7 +25,7 @@
   "commando.configuration.commands.item.autoClear.description": "If true, automatically clear the output channel or terminal before each command. If null, use the value of commando.autoClear.",
   "commando.configuration.commands.item.autoFocus.title": "Auto focus",
   "commando.configuration.commands.item.autoFocus.description": "If true, automatically focus the output channel or terminal before each command. If null, use the value of commando.autoFocus.",
-  "commando.configuration.commands.item.executeInTerminal.title": "Run in terminal",
+  "commando.configuration.commands.item.executeInTerminal.title": "Execute in terminal",
   "commando.configuration.commands.item.executeInTerminal.description": "If true, execute commands in terminal. Otherwise, execute commands on background and show the result in output channel. If null, use the value of commando.executeInTerminal.",
   "commando.configuration.commands.item.shell.title": "Shell",
   "commando.configuration.commands.item.shell.description": "The shell to use for running commands. If empty, the default shell is used. This setting is only available when executeInTerminal is false. If null, use the value of commando.shell.",

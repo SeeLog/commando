@@ -18,6 +18,7 @@ suite('Command test', function () {
     commands: [commandObj],
     autoClear: true,
     autoFocus: true,
+    shell: '',
   };
 
   const getOutputChannelMock = () => {
@@ -123,7 +124,7 @@ suite('Command test', function () {
   });
 
   test('Make sure getShell', () => {
-    assert.strictEqual(command.getShell(commandObj, configObj), undefined);
+    assert.strictEqual(command.getShell(commandObj, configObj), '');
     assert.strictEqual(command.getShell({ ...commandObj, shell: 'zsh' }, configObj), 'zsh');
     assert.strictEqual(command.getShell({ ...commandObj, shell: 'zsh' }, { ...configObj, shell: 'bash' }), 'zsh');
     assert.strictEqual(command.getShell(commandObj, { ...configObj, shell: 'bash' }), 'bash');
