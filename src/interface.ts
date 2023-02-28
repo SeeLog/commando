@@ -4,7 +4,7 @@ export interface ICommand {
   name: string;
   description?: string;
   cmd: string;
-  runOnTerminal?: boolean;
+  executeInTerminal?: boolean;
   windowName?: string;
   shell?: string;
 }
@@ -16,7 +16,7 @@ export interface ISpecialCommand extends ICommand {
 export interface IConfig {
   autoClear: boolean;
   autoFocus: boolean;
-  runOnTerminal?: boolean;
+  executeInTerminal?: boolean;
   windowName?: string;
   shell?: string;
   commands: ICommand[];
@@ -25,7 +25,7 @@ export interface IConfig {
 export interface IDefaultConfig {
   autoClear: boolean;
   autoFocus: boolean;
-  runOnTerminal: boolean;
+  executeInTerminal: boolean;
   windowName: string;
   shell?: string;
   commands: ICommand[];
@@ -34,7 +34,7 @@ export interface IDefaultConfig {
 export const defaultConfig: IDefaultConfig = {
   autoClear: true,
   autoFocus: true,
-  runOnTerminal: false,
+  executeInTerminal: false,
   windowName: 'Commando ${commandName}',
   shell: undefined,
   commands: [],

@@ -21,7 +21,7 @@ export const getConfig = (): IConfig => {
   return {
     autoClear: config.get<boolean>('autoClear') ?? true,
     autoFocus: config.get<boolean>('autoFocus') ?? true,
-    runOnTerminal: config.get<boolean>('runOnTerminal') ?? false,
+    executeInTerminal: config.get<boolean>('executeInTerminal') ?? false,
     windowName: config.get<string>('windowName') ?? 'Commando ${commandName}',
     shell: config.get<string>('shell'),
     commands: config.get<ICommand[]>('commands') ?? [],

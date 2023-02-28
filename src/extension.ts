@@ -1,5 +1,5 @@
 import * as vscode from 'vscode';
-import { runCommand } from './command';
+import { execute } from './command';
 import { ICommand, IConfig, ISpecialCommand } from './interface';
 import { getConfig, LoadConfigError } from './config';
 
@@ -24,7 +24,7 @@ export const activate = (context: vscode.ExtensionContext) => {
     config = getConfig();
   });
 
-  const disposable = vscode.commands.registerCommand('commando.runCommand', async (args) => {
+  const disposable = vscode.commands.registerCommand('commando.execute', async (args) => {
     if (config !== undefined) {
       if (args !== undefined) {
         const name = args.name;
@@ -34,7 +34,7 @@ export const activate = (context: vscode.ExtensionContext) => {
         }
         const command = config.commands.find((command) => command.name === name);
         if (command) {
-          runCommand(command, config);
+          execute(command, config);
           return;
         } else {
           vscode.window.showErrorMessage(`Commando command not found: ${name}`);
@@ -60,7 +60,7 @@ export const activate = (context: vscode.ExtensionContext) => {
       if (!selectedCommand.cmd) {
         return;
       }
-      runCommand(<ICommand>selectedCommand, config);
+      execute(<ICommand>selectedCommand, config);
     } else {
       vscode.window.showErrorMessage(`Commando configuration is invalid.\n${configError?.message}`);
     }
