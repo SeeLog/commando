@@ -36,7 +36,7 @@ If you want to execute a command by pressing Ctrl+Shift+T, you need to add the f
 ## Extension Settings
 ### User Settings
 This extension contributes the following settings:
-- `commando.commands`: List of commands to execute. See [Commands](#Commands) for more information.
+- `commando.commands`: List of commands to execute. See [Commands Settings](#Commands-Settings).
 - `commando.autoClear`: If true, automatically clear the output channel or terminal before each command.
 - `commando.autoFocus`: If true, automatically focus the output channel or terminal before each command.
 - `commando.executeInTerminal`: If true, execute commands in terminal. Otherwise, execute commands on background and show the result in output channel.
