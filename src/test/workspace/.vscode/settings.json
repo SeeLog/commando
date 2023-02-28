@@ -13,7 +13,7 @@
   ],
   "commando.autoClear": true,
   "commando.autoFocus": true,
-  "commando.runOnTerminal": false,
+  "commando.executeInTerminal": false,
   "commando.shell": "bash",
   "commando.windowName": "Commando ${commandName}",
 }

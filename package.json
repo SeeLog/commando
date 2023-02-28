@@ -13,8 +13,8 @@
   "contributes": {
     "commands": [
       {
-        "command": "commando.runCommand",
-        "title": "%commando.runCommand.title%"
+        "command": "commando.execute",
+        "title": "%commando.execute.title%"
       }
     ],
     "configuration": {
@@ -32,11 +32,11 @@
           "title": "%commando.configuration.autoFocus.title%",
           "description": "%commando.configuration.autoFocus.description%"
         },
-        "commando.runOnTerminal": {
+        "commando.executeInTerminal": {
           "type": "boolean",
           "default": false,
-          "title": "%commando.configuration.runOnTerminal.title%",
-          "description": "%commando.configuration.runOnTerminal.description%"
+          "title": "%commando.configuration.executeInTerminal.title%",
+          "description": "%commando.configuration.executeInTerminal.description%"
         },
         "commando.windowName": {
           "type": "string",
@@ -87,11 +87,11 @@
                 "title": "%commando.configuration.commands.item.autoFocus.title%",
                 "description": "%commando.configuration.commands.item.autoFocus.description%"
               },
-              "runOnTerminal": {
+              "executeInTerminal": {
                 "type": ["boolean", "null"],
                 "default": false,
-                "title": "%commando.configuration.commands.item.runOnTerminal.title%",
-                "description": "%commando.configuration.commands.item.runOnTerminal.description%"
+                "title": "%commando.configuration.commands.item.executeInTerminal.title%",
+                "description": "%commando.configuration.commands.item.executeInTerminal.description%"
               },
               "shell": {
                 "type": ["string", "null"],

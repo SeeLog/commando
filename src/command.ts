@@ -10,14 +10,14 @@ import { convertPlaceholder } from './variable';
  * @param command interface
  * @param config interface
  */
-export const runCommand = async (command: ICommand, config: IConfig): Promise<void> => {
-  if (config.runOnTerminal || command.runOnTerminal) {
-    return await runCommandInTerminal(command, config);
+export const execute = async (command: ICommand, config: IConfig): Promise<void> => {
+  if (config.executeInTerminal || command.executeInTerminal) {
+    return await executeInTerminal(command, config);
   }
-  return await runCommandInOutputChannel(command, config);
+  return await executeInOutputChannel(command, config);
 };
 
-export const runCommandInOutputChannel = async (command: ICommand, config: IConfig): Promise<void> => {
+export const executeInOutputChannel = async (command: ICommand, config: IConfig): Promise<void> => {
   const outputChannel = getOutputChannel(getWindowName(command, config));
   if (getAutoClear(command, config)) {
     outputChannel.clear();
@@ -53,7 +53,7 @@ export const runCommandInOutputChannel = async (command: ICommand, config: IConf
   });
 };
 
-export const runCommandInTerminal = async (command: ICommand, config: IConfig): Promise<void> => {
+export const executeInTerminal = async (command: ICommand, config: IConfig): Promise<void> => {
   const terminal = getTerminal(getWindowName(command, config));
   if (getAutoFocus(command, config)) {
     terminal.show();
