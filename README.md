@@ -1,71 +1,80 @@
-# commando README
-
-This is the README for your extension "commando". After writing up a brief description, we recommend including the following sections.
+# Commando: Simple and powerful command executor extension for VSCode.
+Commando is a powerful extension for VSCode that allows you to execute commands easily from the command palette or through keybindings.
 
 ## Features
+- Execute any command from the command palette.
+  - You can configure commands through the `settings.json` file.
+    - Also you can configure through workspace's `settings.json` file.
+- Execute any command from keybindings
+  - You can set up keybindings in the `keybindings.json` file.
 
-Describe specific features of your extension including screenshots of your extension in action. Image paths are relative to this README file.
+### Execute commands from the command palette
+For example if you want to execute the command `echo "Hello World"` from the command palette, you need to add the following configuration to `settings.json` file.
+```json
+  "commando.commands": [
+    {
+      "name": "Hello World",
+      "description": "Prints Hello World to the console",
+      "cmd": "echo \"Hello World\""
+    },
+  ]
+```
 
-For example if there is an image subfolder under your extension project workspace:
-
-\!\[feature X\]\(images/feature-x.png\)
-
-> Tip: Many popular extensions utilize animations. This is an excellent way to show off your extension! We recommend short, focused animations that are easy to follow.
-
-## Requirements
-
-If you have any requirements or dependencies, add a section describing those and how to install and configure them.
+### Execute commands from keybindings
+If you want to execute a command by pressing Ctrl+Shift+T, you need to add the following configuration to the `keybindings.json` file. Additionally, you need to add the command to the `settings.json` file as shown in the previous example.
+```json
+  {
+    "key": "ctrl+shift+t",
+    "command": "commando.execute",
+    "args": {
+      "name": "Hello World"
+    }
+  }
+```
+> Note: Please make sure that the command name is the same as the one you added to `settings.json` file.
 
 ## Extension Settings
-
-Include if your extension adds any VS Code settings through the `contributes.configuration` extension point.
-
-For example:
-
+### User Settings
 This extension contributes the following settings:
+- `commando.commands`: List of commands to execute. See [Commands](#Commands) for more information.
+- `commando.autoClear`: If true, automatically clear the output channel or terminal before each command.
+- `commando.autoFocus`: If true, automatically focus the output channel or terminal before each command.
+- `commando.executeInTerminal`: If true, execute commands in terminal. Otherwise, execute commands on background and show the result in output channel.
+- `commando.windowName`: The name of the output channel or terminal. You can use [placeholders](#Placeholders).
+- `commando.shell`: The shell to use for running commands. If empty, the default shell is used. This setting is only available when `commando.executeInTerminal` is false.
 
-* `myExtension.enable`: Enable/disable this extension.
-* `myExtension.thing`: Set to `blah` to do something.
+### Commands Settings
+- `name`: The name of the command. This is used to identify the command. **This must be unique.**
+- `description`: The description of the command. This is used to show the command in the command palette.
+- `cmd`: The command to execute. You can use [placeholders](#Placeholders).
+- `autoClear`: *(Optional)* If true, automatically clear the output channel or terminal before each command. If null, use the value of `commando.autoClear`.
+- `autoFocus`: *(Optional)* If true, automatically focus the output channel or terminal before each command. If null, use the value of `commando.autoFocus`.
+- `windowName`: *(Optional)* The name of the output channel or terminal. You can use [placeholders](#Placeholders). If null, use the value of `commando.windowName`.
+
+### Placeholders
+You can use placeholders in`cmd` and `windowsName` settings. The following placeholders are available:
+- `${commandName}`: The command name. e.g. "Super Command"
+- `${workspaceFolder}`: The workspace folder full path. e.g. "/home/ubuntu/hoge/.vscode/settings.json"
+- `${workspaceFolderBasename}`: The workspace folder basename. e.g. "workspace"
+- `${homeDir}`: Your home directory. e.g. "/home/ubuntu"
+- `${tmpDir}`: The temporary directory. e.g. "/tmp/hogehoge/"
+- `${platform}`: Your OS platform. e.g. "linux"
+- `${file}`: The file full path. e.g. "/home/ubuntu/hoge/.vscode/settings.json"
+- `${fileBasename}`: The file basename. e.g. "settings.json"
+- `${fileExtname}`: The file extension. e.g. ".json"
+- `${fileBasenameWithoutExt}`: The file basename without extension. e.g. "settings"
+- `${fileDirName}`: The parent directory of the file. e.g. "/home/ubuntu/hoge/.vscode"
+- `${relativeFile}`: The relative file path from `{workspaceFolder}`. e.g. ".vscode/settings.json"
+- `${lineNumber}`: A line number of your selection. e.g. "5"
+- `${lineNumbers}`: Line numbers of your selections. e.g. "5 5"
+- `${columnNumber}`: A column number of your selection. e.g. "26"
+- `${columnNumbers}`: Column numbers of your selection. e.g. "26 32"
+- `${selectedText}`: Your selection text. e.g. "Hello"
+- `${selectedTexts}`: Your selection texts. e.g. "Hello World"
 
 ## Known Issues
-
-Calling out known issues can help limit users opening duplicate issues against your extension.
+- Not yet. Please report if you find any issues.
 
 ## Release Notes
-
-Users appreciate release notes as you update your extension.
-
-### 1.0.0
-
-Initial release of ...
-
-### 1.0.1
-
-Fixed issue #.
-
-### 1.1.0
-
-Added features X, Y, and Z.
-
----
-
-## Following extension guidelines
-
-Ensure that you've read through the extensions guidelines and follow the best practices for creating your extension.
-
-* [Extension Guidelines](https://code.visualstudio.com/api/references/extension-guidelines)
-
-## Working with Markdown
-
-You can author your README using Visual Studio Code. Here are some useful editor keyboard shortcuts:
-
-* Split the editor (`Cmd+\` on macOS or `Ctrl+\` on Windows and Linux).
-* Toggle preview (`Shift+Cmd+V` on macOS or `Shift+Ctrl+V` on Windows and Linux).
-* Press `Ctrl+Space` (Windows, Linux, macOS) to see a list of Markdown snippets.
-
-## For more information
-
-* [Visual Studio Code's Markdown Support](http://code.visualstudio.com/docs/languages/markdown)
-* [Markdown Syntax Reference](https://help.github.com/articles/markdown-basics/)
-
-**Enjoy!**
+### 0.0.1
+Initial release of Commando
