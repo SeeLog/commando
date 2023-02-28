@@ -6,7 +6,7 @@ async function main() {
   try {
     // The folder containing the Extension Manifest package.json
     // Passed to `--extensionDevelopmentPath`
-    const extensionDevelopmentPath = path.resolve(__dirname, '../../');
+    const extensionDevelopmentPath = path.resolve(__dirname, '../../../');
 
     const workspacePath = path.resolve(extensionDevelopmentPath, 'src/test/workspace');
 
