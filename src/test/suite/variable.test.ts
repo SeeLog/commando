@@ -37,6 +37,7 @@ suite('Variable Test Suite', () => {
       commands: [command],
       autoClear: true,
       autoFocus: true,
+      shell: '',
     };
     // open file
     const workspacePath = vscode.workspace.workspaceFolders?.[0].uri.fsPath ?? '';
