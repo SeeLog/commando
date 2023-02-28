@@ -87,8 +87,8 @@ export const getCommandText = (command: ICommand, config: IConfig): string => {
  * @param config config interface
  * @returns shell
  */
-export const getShell = (command: ICommand, config: IConfig): string | undefined => {
-  return command.shell ?? config.shell ?? defaultConfig.shell;
+export const getShell = (command: ICommand, config: IConfig): string => {
+  return command.shell ?? config.shell;
 };
 
 /**
@@ -135,7 +135,7 @@ const getExecOptions = (command: ICommand, config: IConfig): ExecOptions => {
     shell = 'powershell.exe';
   }
   const execOptions: ExecOptions = {
-    shell: shell,
+    shell: shell === '' ? undefined : shell,
     cwd: dir,
   };
   return execOptions;
