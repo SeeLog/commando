@@ -22,7 +22,7 @@ jobs:
         uses: actions/upload-artifact@v3
         with:
           name: extension
-          path: *.vsix
+          path: "*.vsix"
   publish:
     needs: deploy
     runs-on: ubuntu-latest
