@@ -33,6 +33,22 @@ export const activate = (context: vscode.ExtensionContext) => {
     }
   });
 
+  vscode.workspace.onDidSaveTextDocument(async (document) => {
+    const fileName = document.fileName;
+    if (config === undefined || config === null) {
+      return;
+    }
+    for (const command of config?.commands ?? []) {
+      if (command.executeOnSavePattern) {
+        const regex = new RegExp(command.executeOnSavePattern);
+        if (regex.test(fileName)) {
+          // execute commando on save
+          await execute(command, config);
+        }
+      }
+    }
+  });
+
   const disposable = vscode.commands.registerCommand('commando.execute', async (args) => {
     if (config !== undefined) {
       if (args !== undefined) {
