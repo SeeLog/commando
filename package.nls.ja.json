@@ -31,6 +31,8 @@
   "commando.configuration.commands.item.shell.description": "コマンドを実行するシェルを指定できます。空の場合、デフォルトのシェルが使用されます。executeInTerminal が false の場合のみ有効です。null の場合、commando.shell の値を使用します。",
   "commando.configuration.commands.item.windowName.title": "ウィンドウの名前",
   "commando.configuration.commands.item.windowName.description": "出力ウィンドウやターミナルの名前です。プレースホルダーを使用できます。null の場合、commando.windowName の値を使用します。",
+  "commando.configuration.commands.item.executeOnSavePattern.title": "保存時にコマンド実行するファイル名の正規表現",
+  "commando.configuration.commands.item.executeOnSavePattern.description": "保存時にコマンドを実行するファイル名の正規表現です。null や空文字の場合、コマンドは保存時に実行されません。",
 
   "commando.error.valueForKeyNotFound": "${key} が存在しません。",
   "commando.error.duplicateCommandName": "コマンド名が重複しています: ${commandName}",
