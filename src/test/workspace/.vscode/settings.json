@@ -6,6 +6,17 @@
       "cmd": "echo \"Hello World\""
     },
     {
+      "name": "Hello from key",
+      "description": "Prints Hello World to the console",
+      "cmd": "echo \"Hello World from keybinding!!\""
+    },
+    {
+      "name": "Hello from save",
+      "description": "Prints Hello World to the console",
+      "cmd": "echo \"Hello World from file saved!!\"",
+      "executeOnSavePattern": ""
+    },
+    {
       "name": "Placeholders",
       "description": "Prints placeholders to the console",
       "cmd": "echo 'commandName: \"${commandName}\"\nworkspaceFolder: \"${workspaceFolder}\"\nworkspaceFolderBasename: \"${workspaceFolderBasename}\"\nhomeDir: \"${homeDir}\"\ntmpDir: \"${tmpDir}\"\nplatform: \"${platform}\"\nfile: \"${file}\"\nfileBasename: \"${fileBasename}\"\nfileExtname: \"${fileExtname}\"\nfileBasenameWithoutExt: \"${fileBasenameWithoutExt}\"\nfileDirName: \"${fileDirName}\"\nrelativeFile: \"${relativeFile}\"\nlineNumber: \"${lineNumber}\"\nlineNumbers: \"${lineNumbers}\"\ncolumnNumber: \"${columnNumber}\"\ncolumnNumbers: \"${columnNumbers}\"\nselectedText: \"${selectedText}\"\nselectedTexts: \"${selectedTexts}\"'"

@@ -52,7 +52,10 @@ This extension contributes the following settings:
 - `cmd`: The command to execute. You can use [placeholders](#Placeholders).
 - `autoClear`: *(Optional)* If true, automatically clear the output channel or terminal before each command. If null, use the value of `commando.autoClear`.
 - `autoFocus`: *(Optional)* If true, automatically focus the output channel or terminal before each command. If null, use the value of `commando.autoFocus`.
+- `executeInTerminal`: *(Optional)* If true, execute commands in terminal. Otherwise, execute commands on background and show the result in output channel. If null, use the value of `commando.executeInTerminal`.
 - `windowName`: *(Optional)* The name of the output channel or terminal. You can use [placeholders](#Placeholders). If null, use the value of `commando.windowName`.
+- `shell`: *(Optional)* The shell to use for running commands. If empty, the default shell is used. This setting is only available when `commando.executeInTerminal` is false. If null, use the value of `commando.shell`.
+- `executeOnSavePattern`: *(Optional)* The regex pattern of the file to execute the command on save. If null or empty string, the command is not executed on save.
 
 ### Placeholders
 You can use placeholders in`cmd` and `windowsName` settings. The following placeholders are available:

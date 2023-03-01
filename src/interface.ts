@@ -7,6 +7,7 @@ export interface ICommand {
   executeInTerminal?: boolean;
   windowName?: string;
   shell?: string;
+  executeOnSavePattern?: string;
 }
 
 export interface ISpecialCommand extends ICommand {

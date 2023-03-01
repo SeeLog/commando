@@ -104,6 +104,12 @@
                 "default": null,
                 "title": "%commando.configuration.commands.item.windowName.title%",
                 "description": "%commando.configuration.commands.item.windowName.description%"
+              },
+              "executeOnSavePattern": {
+                "type": ["string", "null"],
+                "default": null,
+                "title": "%commando.configuration.commands.item.executeOnSavePattern.title%",
+                "description": "%commando.configuration.commands.item.executeOnSavePattern.description%"
               }
             }
           }
