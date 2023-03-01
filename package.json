@@ -3,6 +3,11 @@
   "displayName": "Commando",
   "description": "The VSCode extension that simply runs commands.",
   "version": "0.0.1",
+  "publisher": "SeeLog",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/SeeLog/commando/"
+  },
   "engines": {
     "vscode": "^1.75.0"
   },
@@ -10,6 +15,7 @@
     "Other"
   ],
   "main": "./out/src/extension.js",
+  "activationEvents": ["onStartupFinished"],
   "contributes": {
     "commands": [
       {
