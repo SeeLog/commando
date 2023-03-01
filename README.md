@@ -10,6 +10,8 @@ Commando is a powerful extension for VSCode that allows you to execute commands 
     - Also you can configure through workspace's `settings.json` file.
 - Execute any command from keybindings
   - You can set up keybindings in the `keybindings.json` file.
+- Execute commands on save
+  - You can configure commands to execute on save through the `settings.json` file.
 
 ### Execute commands from the command palette
 For example if you want to execute the command `echo "Hello World"` from the command palette, you need to add the following configuration to `settings.json` file.
@@ -22,6 +24,18 @@ For example if you want to execute the command `echo "Hello World"` from the com
     },
   ]
 ```
+If you want to automatically clear the output channel or terminal before each command, you can add the following configuration to `settings.json` file.
+```json
+  "commando.commands": [
+    {
+      "name": "Hello World",
+      "description": "Prints Hello World to the console",
+      "cmd": "echo \"Hello World\"",
+      "autoClear": true
+    },
+  ]
+```
+For more information about the configuration, please see [Commands Settings](#Commands-Settings).
 
 ### Execute commands from keybindings
 If you want to execute a command by pressing Ctrl+Shift+T, you need to add the following configuration to the `keybindings.json` file. Additionally, you need to add the command to the `settings.json` file as shown in the previous example.
@@ -35,6 +49,20 @@ If you want to execute a command by pressing Ctrl+Shift+T, you need to add the f
   }
 ```
 > Note: Please make sure that the command name is the same as the one you added to `settings.json` file.
+
+### Execute commands on save
+If you want to execute a command on save, you need to add the following configuration to the `settings.json` file.
+```json
+  "commando.commands": [
+    {
+      "name": "Hello World",
+      "description": "Prints Hello World to the console",
+      "cmd": "echo \"Hello World\"",
+      "executeOnSavePattern": ".*\\.txt"
+    },
+  ]
+```
+> Note: You can use regex pattern for `executeOnSavePattern` setting.
 
 ## Extension Settings
 ### User Settings
