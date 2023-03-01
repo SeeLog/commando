@@ -32,7 +32,7 @@
   "commando.configuration.commands.item.windowName.title": "Window name",
   "commando.configuration.commands.item.windowName.description": "The name of the output channel or terminal. You can use placeholders. If null, use the value of commando.windowName.",
   "commando.configuration.commands.item.executeOnSavePattern.title": "Execute on save file regex pattern",
-  "commando.configuration.commands.item.executeOnSavePattern.description": "Execute the command when the file is saved and the file matches the regex pattern. If null or empty, the command is not executed on save.",
+  "commando.configuration.commands.item.executeOnSavePattern.description": "The regex pattern of the file to execute the command on save. If null or empty string, the command is not executed on save",
 
   "commando.error.valueForKeyNotFound": "Value for ${key} not found in object",
   "commando.error.duplicateCommandName": "Duplicate command name: ${commandName}",
