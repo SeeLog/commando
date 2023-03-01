@@ -1,7 +1,7 @@
 # Commando: Simple and powerful command executor extension for VSCode.
 Commando is a powerful extension for VSCode that allows you to execute commands easily from the command palette or through keybindings.
 
-![demo](https://user-images.githubusercontent.com/28619349/221943611-3f51fd03-6706-465e-8a84-ab41070e9245.gif)
+![demo](https://user-images.githubusercontent.com/28619349/222213677-d948e57c-7c4b-4ad7-9d40-7a5964b02f05.gif)
 
 
 ## Features
