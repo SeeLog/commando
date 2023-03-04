@@ -2,7 +2,7 @@
   "name": "commando",
   "displayName": "Commando",
   "description": "The VSCode extension that simply runs commands.",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "publisher": "SeeLog",
   "repository": {
     "type": "git",
