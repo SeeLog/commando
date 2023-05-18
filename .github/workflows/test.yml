@@ -46,5 +46,5 @@ jobs:
           DISPLAY: ":99.0"
         if: ${{ success() && matrix.os == 'ubuntu-latest' }}
       - name: Run test on ${{ matrix.os }}
-        run: npm test
+        run: npm test --verbose
         if: ${{ success() && matrix.os != 'ubuntu-latest' }}
