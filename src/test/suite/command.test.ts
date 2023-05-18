@@ -100,18 +100,20 @@ suite('Command test', function () {
     const mock = getOutputChannelMock();
     sinon.stub(logger, 'getOutputChannel').callsFake(mock.getOutputChannel);
     await command.executeInOutputChannel(commandObj, configObj);
-    assert.strictEqual(mock.outputResult.length, 2);
-    assert.strictEqual(mock.outputResult[0], 'test from test\n');
-    assert.strictEqual(mock.outputResult[1], 'Commando done.\n');
+    assert.strictEqual(mock.outputResult.length, 3);
+    assert.strictEqual(mock.outputResult[0], 'Commando start.\n');
+    assert.strictEqual(mock.outputResult[1], 'test from test\n');
+    assert.strictEqual(mock.outputResult[2], 'Commando done.\n');
   });
 
   test('Make sure executeInOutputChannel with status code 1', async () => {
     const mock = getOutputChannelMock();
     sinon.stub(logger, 'getOutputChannel').callsFake(mock.getOutputChannel);
     await command.executeInOutputChannel({ ...commandObj, cmd: 'exit 1' }, configObj);
-    assert.strictEqual(mock.outputResult.length, 2);
-    assert.strictEqual(mock.outputResult[0], 'Command exited with code 1\n');
-    assert.strictEqual(mock.outputResult[1], 'Commando done.\n');
+    assert.strictEqual(mock.outputResult.length, 3);
+    assert.strictEqual(mock.outputResult[0], 'Commando start.\n');
+    assert.strictEqual(mock.outputResult[1], 'Command exited with code 1\n');
+    assert.strictEqual(mock.outputResult[2], 'Commando done.\n');
   });
 
   test('Make sure executeInTerminal', async () => {
@@ -137,15 +139,17 @@ suite('Command test', function () {
     const mock = getOutputChannelMock();
     sinon.stub(logger, 'getOutputChannel').callsFake(mock.getOutputChannel);
     await command.executeInOutputChannel({ ...commandObj, shell: '/bin/sh', cmd: 'echo $0' }, configObj);
-    assert.strictEqual(mock.outputResult.length, 2);
-    assert.strictEqual(mock.outputResult[0].indexOf('/bin/sh') > -1, true);
-    assert.strictEqual(mock.outputResult[1], 'Commando done.\n');
+    assert.strictEqual(mock.outputResult.length, 3);
+    assert.strictEqual(mock.outputResult[0], 'Commando start.\n');
+    assert.strictEqual(mock.outputResult[1].indexOf('/bin/sh') > -1, true);
+    assert.strictEqual(mock.outputResult[2], 'Commando done.\n');
     mock.outputResult.length = 0;
 
     await command.executeInOutputChannel({ ...commandObj, shell: '/bin/bash', cmd: 'echo $0' }, configObj);
-    assert.strictEqual(mock.outputResult.length, 2);
-    assert.strictEqual(mock.outputResult[0].indexOf('bash') > -1, true);
-    assert.strictEqual(mock.outputResult[1], 'Commando done.\n');
+    assert.strictEqual(mock.outputResult.length, 3);
+    assert.strictEqual(mock.outputResult[0], 'Commando start.\n');
+    assert.strictEqual(mock.outputResult[1].indexOf('bash') > -1, true);
+    assert.strictEqual(mock.outputResult[2], 'Commando done.\n');
   });
 
   test('Make sure getWindowName', () => {
