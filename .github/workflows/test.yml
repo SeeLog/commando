@@ -28,6 +28,10 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: ${{ matrix.node }}
+      - name: Set execution policy on Windows
+        run: Set-ExecutionPolicy -Scope Process -ExecutionPolicy Bypass
+        shell: powershell
+        if: ${{ success() && matrix.os == 'windows-latest' }}
       - run: /usr/bin/Xvfb :99 -screen 0 1024x768x24 > /dev/null 2>&1 & echo "Starting Xvfb..."
         shell: bash
         if: ${{ success() && matrix.os == 'ubuntu-latest' }}
