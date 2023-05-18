@@ -35,6 +35,6 @@ jobs:
         run: npm ci
       - name: Run test
         # pretest run compile and lint automatically
-        run: npm run test
+        run: npm test
         env:
           DISPLAY: ":99.0"
