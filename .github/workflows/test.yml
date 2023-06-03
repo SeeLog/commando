@@ -13,9 +13,15 @@ jobs:
     name: Test on ${{ matrix.os }}
     runs-on: ${{ matrix.os }}
     timeout-minutes: 10
+    env:
+      CHILD_CONCURRENCY: 1
     strategy:
       matrix:
-        os: [ubuntu-latest, windows-latest, macos-latest]
+        os: [
+          ubuntu-latest,
+          windows-latest,
+          macos-latest
+        ]
         node:
           - 18
     steps:
