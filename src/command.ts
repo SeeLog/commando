@@ -28,6 +28,8 @@ export const executeInOutputChannel = async (command: ICommand, config: IConfig)
 
   const options = getExecOptions(command, config);
 
+  outputChannel.appendLine('Commando start.');
+
   // exec command
   const commandText = getCommandText(command, config);
   const child = exec(commandText, options);
