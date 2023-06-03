@@ -23,7 +23,9 @@
     "Other"
   ],
   "main": "./out/src/extension.js",
-  "activationEvents": ["onStartupFinished"],
+  "activationEvents": [
+    "onStartupFinished"
+  ],
   "contributes": {
     "commands": [
       {
@@ -80,7 +82,10 @@
                 "description": "%commando.configuration.commands.item.name.description%"
               },
               "description": {
-                "type": ["string", "null"],
+                "type": [
+                  "string",
+                  "null"
+                ],
                 "title": "%commando.configuration.commands.item.description.title%",
                 "description": "%commando.configuration.commands.item.description.description%"
               },
@@ -90,37 +95,55 @@
                 "description": "%commando.configuration.commands.item.cmd.description%"
               },
               "autoClear": {
-                "type": ["boolean", "null"],
+                "type": [
+                  "boolean",
+                  "null"
+                ],
                 "default": true,
                 "title": "%commando.configuration.commands.item.autoClear.title%",
                 "description": "%commando.configuration.commands.item.autoClear.description%"
               },
               "autoFocus": {
-                "type": ["boolean", "null"],
+                "type": [
+                  "boolean",
+                  "null"
+                ],
                 "default": true,
                 "title": "%commando.configuration.commands.item.autoFocus.title%",
                 "description": "%commando.configuration.commands.item.autoFocus.description%"
               },
               "executeInTerminal": {
-                "type": ["boolean", "null"],
+                "type": [
+                  "boolean",
+                  "null"
+                ],
                 "default": false,
                 "title": "%commando.configuration.commands.item.executeInTerminal.title%",
                 "description": "%commando.configuration.commands.item.executeInTerminal.description%"
               },
               "shell": {
-                "type": ["string", "null"],
+                "type": [
+                  "string",
+                  "null"
+                ],
                 "default": null,
                 "title": "%commando.configuration.commands.item.shell.title%",
                 "description": "%commando.configuration.commands.item.shell.description%"
               },
               "windowName": {
-                "type": ["string", "null"],
+                "type": [
+                  "string",
+                  "null"
+                ],
                 "default": null,
                 "title": "%commando.configuration.commands.item.windowName.title%",
                 "description": "%commando.configuration.commands.item.windowName.description%"
               },
               "executeOnSavePattern": {
-                "type": ["string", "null"],
+                "type": [
+                  "string",
+                  "null"
+                ],
                 "default": null,
                 "title": "%commando.configuration.commands.item.executeOnSavePattern.title%",
                 "description": "%commando.configuration.commands.item.executeOnSavePattern.description%"
@@ -148,7 +171,7 @@
     "@types/vscode": "^1.75.0",
     "@typescript-eslint/eslint-plugin": "^5.49.0",
     "@typescript-eslint/parser": "^5.49.0",
-    "@vscode/test-electron": "^2.2.2",
+    "@vscode/test-electron": "^2.3.2",
     "eslint": "^8.33.0",
     "eslint-config-prettier": "^8.6.0",
     "eslint-plugin-prettier": "^4.2.1",
@@ -157,6 +180,5 @@
     "prettier": "^2.8.4",
     "sinon": "^15.0.1",
     "typescript": "^4.9.4"
-  },
-  "dependencies": {}
+  }
 }
