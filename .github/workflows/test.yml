@@ -13,8 +13,6 @@ jobs:
     name: Test on ${{ matrix.os }}
     runs-on: ${{ matrix.os }}
     timeout-minutes: 10
-    env:
-      CHILD_CONCURRENCY: 1
     strategy:
       matrix:
         os: [
@@ -34,17 +32,11 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: ${{ matrix.node }}
-      - name: Set execution policy on Windows
-        run: Set-ExecutionPolicy -Scope CurrentUser -ExecutionPolicy RemoteSigned -Force
-        shell: powershell
-        if: ${{ success() && matrix.os == 'windows-latest' }}
       - run: /usr/bin/Xvfb :99 -screen 0 1024x768x24 > /dev/null 2>&1 & echo "Starting Xvfb..."
         shell: bash
         if: ${{ success() && matrix.os == 'ubuntu-latest' }}
       - name: Install dependencies
         run: npm ci
-      - name: Clear cache
-        run: npm cache clean --force
       - name: Run test on Ubuntu
         # pretest run compile and lint automatically
         run: npm test
@@ -52,5 +44,5 @@ jobs:
           DISPLAY: ":99.0"
         if: ${{ success() && matrix.os == 'ubuntu-latest' }}
       - name: Run test on ${{ matrix.os }}
-        run: npm test --verbose
+        run: npm test
         if: ${{ success() && matrix.os != 'ubuntu-latest' }}
