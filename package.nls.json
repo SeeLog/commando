@@ -11,6 +11,8 @@
   "commando.configuration.windowName.description": "The name of the output channel or terminal. You can use placeholders.",
   "commando.configuration.shell.title": "Shell",
   "commando.configuration.shell.description": "The shell to use for running commands. If empty, the default shell is used. This setting is only available when executeInTerminal is false.",
+  "commando.configuration.showInStatusBar.title": "Show in status bar",
+  "commando.configuration.showInStatusBar.description": "If true, show the commando status bar item. Default: false",
   "commando.configuration.commands.title": "Commands",
   "commando.configuration.commands.description": "The list of commands to execute.",
   "commando.configuration.commands.item.title": "Command",

@@ -28,5 +28,6 @@ export const getConfig = (): IConfig => {
     windowName: config.get<string>('windowName') ?? 'Commando ${commandName}',
     shell: config.get<string>('shell') ?? '',
     commands: config.get<ICommand[]>('commands') ?? [],
+    showInStatusBar: config.get<boolean>('showInStatusBar') ?? true,
   };
 };

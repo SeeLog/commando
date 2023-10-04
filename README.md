@@ -73,6 +73,7 @@ This extension contributes the following settings:
 - `commando.executeInTerminal`: If true, execute commands in terminal. Otherwise, execute commands on background and show the result in output channel.
 - `commando.windowName`: The name of the output channel or terminal. You can use [placeholders](#Placeholders).
 - `commando.shell`: The shell to use for running commands. If empty, the default shell is used. This setting is only available when `commando.executeInTerminal` is false.
+- `commando.showInStatusBar`: If true, show the status bar item. Otherwise, hide the status bar item. Default is false.
 
 ### Commands Settings
 - `name`: The name of the command. This is used to identify the command. **This must be unique.**

@@ -21,6 +21,7 @@ export interface IConfig {
   windowName?: string;
   shell: string;
   commands: ICommand[];
+  showInStatusBar?: boolean;
 }
 
 export interface IDefaultConfig {

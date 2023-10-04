@@ -66,6 +66,12 @@
           "title": "%commando.configuration.shell.title%",
           "description": "%commando.configuration.shell.description%"
         },
+        "commando.showInStatusBar": {
+          "type": "boolean",
+          "default": false,
+          "title": "%commando.configuration.showInStatusBar.title%",
+          "description": "%commando.configuration.showInStatusBar.description%"
+        },
         "commando.commands": {
           "type": "array",
           "default": [],

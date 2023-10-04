@@ -11,6 +11,8 @@
   "commando.configuration.windowName.description": "出力ウィンドウやターミナルの名前です。プレースホルダーを使用できます。",
   "commando.configuration.shell.title": "Shell",
   "commando.configuration.shell.description": "コマンドを実行するシェルを指定できます。空の場合、デフォルトのシェルが使用されます。executeInTerminal が false の場合のみ有効です。",
+  "commando.configuration.showInStatusBar.title": "ステータスバーに表示するかどうか",
+  "commando.configuration.showInStatusBar.description": "true の場合、ステータスバーにコマンドを表示します。デフォルトは false です。",
   "commando.configuration.commands.title": "コマンドリスト",
   "commando.configuration.commands.description": "実行するコマンドのリストです。",
   "commando.configuration.commands.item.title": "コマンド",
