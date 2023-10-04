@@ -8,10 +8,11 @@ export interface ICommand {
   windowName?: string;
   shell?: string;
   executeOnSavePattern?: string;
+  group?: string;
 }
 
 export interface ISpecialCommand extends ICommand {
-  kind?: 'openWorkspaceConfig' | 'openUserConfig';
+  kind?: 'openWorkspaceConfig' | 'openUserConfig' | 'group' | 'separator';
 }
 
 export interface IConfig {

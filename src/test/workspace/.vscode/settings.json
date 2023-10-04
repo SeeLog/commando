@@ -3,7 +3,7 @@
     {
       "name": "Hello World",
       "description": "Prints Hello World to the console",
-      "cmd": "echo \"Hello World\""
+      "cmd": "echo \"Hello World\"",
     },
     {
       "name": "Hello from key",
@@ -20,11 +20,32 @@
       "name": "Placeholders",
       "description": "Prints placeholders to the console",
       "cmd": "echo 'commandName: \"${commandName}\"\nworkspaceFolder: \"${workspaceFolder}\"\nworkspaceFolderBasename: \"${workspaceFolderBasename}\"\nhomeDir: \"${homeDir}\"\ntmpDir: \"${tmpDir}\"\nplatform: \"${platform}\"\nfile: \"${file}\"\nfileBasename: \"${fileBasename}\"\nfileExtname: \"${fileExtname}\"\nfileBasenameWithoutExt: \"${fileBasenameWithoutExt}\"\nfileDirName: \"${fileDirName}\"\nrelativeFile: \"${relativeFile}\"\nlineNumber: \"${lineNumber}\"\nlineNumbers: \"${lineNumbers}\"\ncolumnNumber: \"${columnNumber}\"\ncolumnNumbers: \"${columnNumbers}\"\nselectedText: \"${selectedText}\"\nselectedTexts: \"${selectedTexts}\"'"
-    }
+    },
+    {
+      "name": "Grouped Hello World",
+      "description": "Prints Hello World to the console",
+      "cmd": "echo \"Hello World\"",
+      "group": "Hello World"
+    },
+    {
+      "name": "Grouped Hello World 2",
+      "description": "Prints Hello World to the console",
+      "cmd": "echo \"Hello World 2\"",
+      "group": "Hello World"
+    },
   ],
   "commando.autoClear": true,
   "commando.autoFocus": true,
   "commando.executeInTerminal": false,
   "commando.shell": "bash",
   "commando.windowName": "Commando ${commandName}",
+  "commando.showInStatusBar": false,
+  "workbench.colorCustomizations": {
+    "editor.lineHighlightBackground": "#1073cf2d",
+    "editor.lineHighlightBorder": "#9fced11f",
+    "editorCursor.foreground": "#ff8800",
+    "activityBar.background": "#3A2B21",
+    "titleBar.activeBackground": "#513C2F",
+    "titleBar.activeForeground": "#FBF9F8"
+  },
 }

@@ -8,12 +8,16 @@ import { fmt } from './util';
 export type PickerCommandItem = vscode.QuickPickItem & { commandoCommand: ICommand & ISpecialCommand };
 
 const statusBarItem = vscode.window.createStatusBarItem(vscode.StatusBarAlignment.Right, 100);
+let groupMap: Record<string, PickerCommandItem[]> = {};
+let pickerItems: PickerCommandItem[] = [];
 
 export const activate = (context: vscode.ExtensionContext) => {
   let config: IConfig | undefined = undefined;
   let configError: LoadConfigError | undefined = undefined;
   try {
     config = getConfig();
+    refreshPickerItems(config);
+    refreshStatusBar();
   } catch (error) {
     if (error instanceof LoadConfigError) {
       configError = error;
@@ -26,6 +30,7 @@ export const activate = (context: vscode.ExtensionContext) => {
     console.log('Commando configuration changed.');
     try {
       config = getConfig();
+      refreshPickerItems(config);
       refreshStatusBar();
     } catch (error) {
       if (error instanceof LoadConfigError) {
@@ -73,8 +78,8 @@ export const activate = (context: vscode.ExtensionContext) => {
           return;
         }
       }
-      const pickItems = getPickerItems(config);
-      const selectedItem = await vscode.window.showQuickPick<PickerCommandItem>(pickItems, {
+
+      const selectedItem = await vscode.window.showQuickPick<PickerCommandItem>(pickerItems, {
         placeHolder: 'Select a command to run',
       });
       const selectedCommand = selectedItem?.commandoCommand;
@@ -88,6 +93,17 @@ export const activate = (context: vscode.ExtensionContext) => {
         // open json file
         await vscode.commands.executeCommand('workbench.action.openSettingsJson');
         return;
+      } else if (selectedCommand.kind === 'group') {
+        // show group items
+        const groupItems = getGroupItems(config, selectedCommand.name);
+        const selectedItem = await vscode.window.showQuickPick<PickerCommandItem>(groupItems, {
+          placeHolder: 'Select a command to run',
+        });
+        const groupSelectedCommand = selectedItem?.commandoCommand;
+        if (!groupSelectedCommand) {
+          return;
+        }
+        execute(<ICommand>groupSelectedCommand, config);
       }
       if (!selectedCommand.cmd) {
         return;
@@ -123,15 +139,93 @@ export const refreshStatusBar = () => {
   }
 };
 
-const getPickerItems = (config: IConfig): PickerCommandItem[] => {
-  const pickItems: PickerCommandItem[] = config.commands.map((command) => ({
-    label: command.name,
-    description: command.description,
-    commandoCommand: command,
-  }));
+const getGroupItems = (config: IConfig, group: string): PickerCommandItem[] => {
+  const groupItems = groupMap[group];
+  if (!groupItems) {
+    return [];
+  }
+  return groupItems;
+};
+
+const refreshPickerItems = (config: IConfig): PickerCommandItem[] => {
+  groupMap = {};
+  pickerItems = [];
+  const notGroupItems: PickerCommandItem[] = [];
+  for (const command of config.commands) {
+    if (command.group) {
+      if (!groupMap[command.group]) {
+        groupMap[command.group] = [];
+      }
+      groupMap[command.group].push({
+        label: command.name,
+        description: command.description,
+        commandoCommand: {
+          kind: 'group',
+          ...command,
+        },
+      });
+    } else {
+      notGroupItems.push({
+        label: command.name,
+        description: command.description,
+        commandoCommand: command,
+      });
+    }
+  }
+  if (Object.keys(groupMap).length > 0) {
+    pickerItems.push({
+      kind: vscode.QuickPickItemKind.Separator,
+      label: 'Group Commands',
+      description: '',
+      commandoCommand: {
+        kind: 'separator',
+        name: '',
+        description: '',
+        cmd: '',
+      },
+    });
+  }
+  // merge groupMap and notGroupItems to pickerItems
+  for (const group in groupMap) {
+    pickerItems.push({
+      label: group,
+      detail: groupMap[group].length + ' commands',
+      description: 'Group Commands',
+      commandoCommand: {
+        kind: 'group',
+        name: group,
+        description: '',
+        cmd: '',
+      },
+    });
+  }
+  pickerItems.push({
+    kind: vscode.QuickPickItemKind.Separator,
+    label: 'Commands',
+    description: '',
+    commandoCommand: {
+      kind: 'separator',
+      name: '',
+      description: '',
+      cmd: '',
+    },
+  });
+  pickerItems.push(...notGroupItems);
+
+  pickerItems.push({
+    kind: vscode.QuickPickItemKind.Separator,
+    label: 'Configurations',
+    description: '',
+    commandoCommand: {
+      kind: 'separator',
+      name: '',
+      description: '',
+      cmd: '',
+    },
+  });
 
   // Add special commands
-  pickItems.push({
+  pickerItems.push({
     label: 'Show workspace config',
     description: 'Show workspace config',
     commandoCommand: {
@@ -141,7 +235,7 @@ const getPickerItems = (config: IConfig): PickerCommandItem[] => {
       kind: 'openWorkspaceConfig',
     },
   });
-  pickItems.push({
+  pickerItems.push({
     label: 'Show user config',
     description: 'Show user config',
     commandoCommand: {
@@ -152,5 +246,5 @@ const getPickerItems = (config: IConfig): PickerCommandItem[] => {
     },
   });
 
-  return pickItems;
+  return pickerItems;
 };
