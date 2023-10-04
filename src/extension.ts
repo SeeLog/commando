@@ -7,6 +7,8 @@ import { fmt } from './util';
 
 export type PickerCommandItem = vscode.QuickPickItem & { commandoCommand: ICommand & ISpecialCommand };
 
+const statusBarItem = vscode.window.createStatusBarItem(vscode.StatusBarAlignment.Right, 100);
+
 export const activate = (context: vscode.ExtensionContext) => {
   let config: IConfig | undefined = undefined;
   let configError: LoadConfigError | undefined = undefined;
@@ -24,6 +26,7 @@ export const activate = (context: vscode.ExtensionContext) => {
     console.log('Commando configuration changed.');
     try {
       config = getConfig();
+      refreshStatusBar();
     } catch (error) {
       if (error instanceof LoadConfigError) {
         configError = error;
@@ -49,7 +52,9 @@ export const activate = (context: vscode.ExtensionContext) => {
     }
   });
 
-  const disposable = vscode.commands.registerCommand('commando.execute', async (args) => {
+  const commandId = 'commando.execute';
+
+  const disposable = vscode.commands.registerCommand(commandId, async (args) => {
     if (config !== undefined) {
       if (args !== undefined) {
         const name = args.name;
@@ -94,11 +99,28 @@ export const activate = (context: vscode.ExtensionContext) => {
   });
 
   context.subscriptions.push(disposable);
+
+  // status bar
+  refreshStatusBar();
 };
 
 // This method is called when your extension is deactivated
 export const deactivate = () => {
   console.log('Commando deactivated');
+};
+
+export const refreshStatusBar = () => {
+  const config = getConfig();
+  statusBarItem.command = 'commando.execute';
+  statusBarItem.text = 'Commando';
+  statusBarItem.tooltip = 'Commando: Execute command';
+  if (config?.showInStatusBar) {
+    console.log('Show Commando in status bar');
+    statusBarItem.show();
+  } else {
+    console.log('Hide Commando in status bar');
+    statusBarItem.hide();
+  }
 };
 
 const getPickerItems = (config: IConfig): PickerCommandItem[] => {
