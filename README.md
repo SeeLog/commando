@@ -85,6 +85,7 @@ This extension contributes the following settings:
 - `windowName`: *(Optional)* The name of the output channel or terminal. You can use [placeholders](#Placeholders). If null, use the value of `commando.windowName`.
 - `shell`: *(Optional)* The shell to use for running commands. If empty, the default shell is used. This setting is only available when `commando.executeInTerminal` is false. If null, use the value of `commando.shell`.
 - `executeOnSavePattern`: *(Optional)* The regex pattern of the file to execute the command on save. If null or empty string, the command is not executed on save.
+- `group`: *(Optional)* The group name of the command. If null or empty string, the command is not grouped.
 
 ### Placeholders
 You can use placeholders in`cmd` and `windowsName` settings. The following placeholders are available:
