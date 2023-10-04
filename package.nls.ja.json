@@ -35,6 +35,8 @@
   "commando.configuration.commands.item.windowName.description": "出力ウィンドウやターミナルの名前です。プレースホルダーを使用できます。null の場合、commando.windowName の値を使用します。",
   "commando.configuration.commands.item.executeOnSavePattern.title": "保存時にコマンド実行するファイル名の正規表現",
   "commando.configuration.commands.item.executeOnSavePattern.description": "保存時にコマンドを実行するファイル名の正規表現です。null や空文字の場合、コマンドは保存時に実行されません。",
+  "commando.configuration.commands.item.group.title": "グループ",
+  "commando.configuration.commands.item.group.description": "コマンドをグループ化するための名前です。null や空文字の場合、コマンドはグループ化されません。",
 
   "commando.error.valueForKeyNotFound": "${key} が存在しません。",
   "commando.error.duplicateCommandName": "コマンド名が重複しています: ${commandName}",

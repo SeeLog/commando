@@ -153,6 +153,15 @@
                 "default": null,
                 "title": "%commando.configuration.commands.item.executeOnSavePattern.title%",
                 "description": "%commando.configuration.commands.item.executeOnSavePattern.description%"
+              },
+              "group": {
+                "type": [
+                  "string",
+                  "null"
+                ],
+                "default": null,
+                "title": "%commando.configuration.commands.item.group.title%",
+                "description": "%commando.configuration.commands.item.group.description%"
               }
             }
           }
